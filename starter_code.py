@@ -468,7 +468,49 @@ def visualize_dna_mutation(
     Please do not include it in the autograder as it may not be able to find the module and may raise errors. (You may remove this function in this case).
     """
     # Please complete this function
-    pass
+    if mutation_index:
+        if window > 0:
+            start = max(0,mutation_index-window)
+            end = min(len(wild_type), mutation_index + window + 1)
+
+            wild_type_display = wild_type[start:end]
+            patient_display = patient[start:end]
+
+            if start > 0:
+                wild_type_display = "..." + wild_type_display
+                patient_display = "..." + patient_display
+            if end < len(wild_type):
+                wild_type_display += "..."
+                patient_display += "..."
+        else:
+            wild_type_display = wild_type
+            patient_display = patient
+        
+        if mutation_type == DNAMutation.SUBSTITUTION:
+            mutation_str = f"Substitution at index {mutation_index}: {wild_type[mutation_index]} → {patient[mutation_index]}"
+        elif mutation_type == DNAMutation.INSERTION:
+            mutation_str = f"Insertion at index {mutation_index}: {patient[mutation_index]} inserted"
+        elif mutation_type == DNAMutation.DELETION:
+            mutation_str = f"Deletion at index {mutation_index}: {wild_type[mutation_index]} deleted"
+        elif mutation_type == DNAMutation.MULTI:
+            mutation_str = f"Multiple mutations around index {mutation_index}"
+        else:
+            mutation_str = "No mutation"
+        
+        result = (
+            f"Wild-type DNA: {wild_type_display}\n"
+            f"Patient DNA: {patient_display}\n"
+            f"Mutation: {mutation_str}"
+        )
+    else:
+        result = "No mutation"
+
+    return result
+
+
+
+
+
 
 
 def visualize_aa_mutation(
@@ -495,7 +537,65 @@ def visualize_aa_mutation(
     Please do not include it in the autograder as it may not be able to find the module and may raise errors. (You may remove this function in this case).
     """
     # Please complete this function
-    pass
+    if mutation_dict:
+        mutation_index = list(mutation_dict.keys())[0]
+
+        wild_aa, patient_aa = mutation_dict[mutation_index]
+
+        if window > 0:
+            start = max(0,mutation_index - window)
+            end = min(len(wild_type),mutation_index+window+1)
+
+            wild_type_display = wild_type[start:end]
+            patient_display = patient[start:end]
+
+            if start > 0:
+                wild_type_display = "..." + wild_type_display
+                patient_display = "..." + patient_display
+            if end < len(wild_type):
+                wild_type_display += "..."
+                patient_display += "..."
+        else:
+            wild_type_display = wild_type
+            patient_display = patient
+        
+        if mutation_type == AAMutation.MISSENSE:
+            mutation_str = f"Missense mutation at index {mutation_index}: {wild_aa} → {patient_aa}"
+        elif mutation_type == AAMutation.NONSENSE:
+            mutation_str = f"Nonsense mutation at index {mutation_index}: {wild_aa} → {patient_aa} (stop codon)"
+        elif mutation_type == AAMutation.FRAMESHIFT:
+            mutation_str = f"Frameshift mutation starting at index {mutation_index}"
+        elif mutation_type == AAMutation.SILENT:
+            mutation_str = f"Silent mutation at {mutation_index}: No change in amino acid"
+        else:
+            mutation_str = "Unknown mutation"
+        
+        result = (
+            f"Wild-type amino acid sequence: {wild_type_display}\n"
+            f"Patient amino acid sequence: {patient_display}\n"
+            f"Mutation: {mutation_str}"
+        )
+    else:
+        if mutation_type == AAMutation.FRAMESHIFT:
+            if window > 0:
+                wild_type_display = wild_type[:window] + "..." + wild_type[-window:]
+                patient_display = patient[:window] + "..." + patient[-window:]
+            else:
+                wild_type_display = wild_type
+                patient_display = patient
+            
+            mutation_str = f"Frameshift mutation affecting the whole sequence"
+            result = (
+                f"Wild-type amino acid sequence: {wild_type_display}\n"
+                f"Patient amino acid sequence: {patient_display}\n"
+                f"Mutation: {mutation_str}"
+            )
+        else:
+            result = "No mutation detected"
+
+
+
+    return result
 
 
 
@@ -704,5 +804,5 @@ def main(wild_type_file: str, patient_file: str) -> str:
 if __name__ == "__main__":
     doctest.testmod()
     # Please put the sequences (e.g., wild_type.txt, patient_1.txt) in the same directory/folder as this Python script
-    ANALYSIS_REPORT = main('wild_type.txt', 'patient_1.txt') # You may change the file name to see the results of other patients
+    ANALYSIS_REPORT = main('wild_type.txt', 'patient_17.txt') # You may change the file name to see the results of other patients
     print(ANALYSIS_REPORT)
