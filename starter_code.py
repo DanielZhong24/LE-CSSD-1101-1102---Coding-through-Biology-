@@ -426,6 +426,7 @@ def identify_aa_mutation(
                 else:
                     result[i] = (wild_type[i], patient[i])
     
+
     if dna_mutation == DNAMutation.INSERTION:
         for i in range(wild_type_length, patient_length):
             result[i] = ('*', patient[i])
