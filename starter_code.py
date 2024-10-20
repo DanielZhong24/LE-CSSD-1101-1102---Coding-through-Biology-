@@ -347,11 +347,6 @@ def identify_dna_mutation(wild_type: str, patient: str) -> (DNAMutation, int):
                 return DNAMutation.DELETION, codon
             else:
                 return DNAMutation.SUBSTITUTION, codon
-            
-    if len(patient) > len(wild_type):
-        return DNAMutation.INSERTION, len(wild_type)
-    elif len(patient) < len(wild_type):
-        return DNAMutation.DELETION, len(patient)
 
 
 def translate_rna(orf: str) -> str:
@@ -425,6 +420,11 @@ def identify_aa_mutation(
                 return {i: (wild_type[i], '*')}, AAMutation.NONSENSE
             else:
                 result[i] = (wild_type[i], patient[i])
+
+    if wild_type_length > patient_length and wild_type[:patient_length] == patient:
+        for i in range(patient_length, wild_type_length):
+            result[i] = (wild_type[i], '*')
+        return result, AAMutation.NONSENSE
 
     if dna_mutation == DNAMutation.INSERTION:
         for i in range(wild_type_length, patient_length):
