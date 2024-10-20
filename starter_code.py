@@ -409,7 +409,6 @@ def identify_aa_mutation(
     >>> identify_aa_mutation("MILIYILI", "MILI", DNAMutation.SUBSTITUTION)
     ({4: ('Y', '*'), 5: ('I', '*'), 6: ('L', '*'), 7: ('I', '*')}, <AAMutation.NONSENSE: 2>)
     """
-    # Please complete this function
     
     result = {}
     wild_type_length = len(wild_type)
@@ -417,31 +416,32 @@ def identify_aa_mutation(
 
     if wild_type == patient or dna_mutation == DNAMutation.NONE:
         return {}, AAMutation.SILENT
-    
-    for i in range(wild_type_length):
-        if dna_mutation == DNAMutation.SUBSTITUTION:
-            if i >= patient_length or wild_type[i] != patient[i]:
-                if i >= patient_length or patient[i] == '*':
-                    result[i] = (wild_type[i], '*')
-                else:
-                    result[i] = (wild_type[i], patient[i])
-    
+
+    min_length = min(wild_type_length, patient_length)
+
+    for i in range(min_length):
+        if wild_type[i] != patient[i]:
+            if patient[i] == '*':
+                return {i: (wild_type[i], '*')}, AAMutation.NONSENSE
+            else:
+                result[i] = (wild_type[i], patient[i])
 
     if dna_mutation == DNAMutation.INSERTION:
         for i in range(wild_type_length, patient_length):
             result[i] = ('*', patient[i])
         return result, AAMutation.FRAMESHIFT
-    elif dna_mutation == DNAMutation.DELETION:
+
+    if dna_mutation == DNAMutation.DELETION:
         for i in range(patient_length, wild_type_length):
             result[i] = (wild_type[i], '*')
         return result, AAMutation.FRAMESHIFT
-    
+
     if result:
-        for key in result:
-            if result[key][1] == '*':
-                return result, AAMutation.NONSENSE
-        return result, AAMutation.MISSENSE
-    
+        if len(result) == 1:
+            return result, AAMutation.MISSENSE
+
+        return result, AAMutation.FRAMESHIFT
+
     return {}, AAMutation.SILENT
 
 def visualize_dna_mutation(

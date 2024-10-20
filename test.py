@@ -3,7 +3,7 @@ from starter_code import *
 with open("wild_type.txt","r") as file:
     wild_type = file.readlines()[2]
 
-with open("patient_2.txt","r") as file:
+with open("patient_15.txt","r") as file:
     patient = file.readlines()[2]
 
 
@@ -19,9 +19,9 @@ patient_type_aa = translate_rna(patient_type_orf)
 
 
 dna_mutation = identify_dna_mutation(wild_type,patient)
-aa_mutation = identify_aa_mutation(wild_type_aa,patient_type_aa,dna_mutation[0])
 
-print(visualize_aa_mutation(wild_type_aa,patient_type_aa,aa_mutation[1],aa_mutation[0],3))
+aa_mutation = identify_aa_mutation(wild_type_aa,patient_type_aa,dna_mutation[0])
+print(visualize_aa_mutation(wild_type_aa,patient_type_aa,aa_mutation[1],aa_mutation[0],10))
 
 '''
 Handles:
