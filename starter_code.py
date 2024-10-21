@@ -805,5 +805,8 @@ def main(wild_type_file: str, patient_file: str) -> str:
 if __name__ == "__main__":
     doctest.testmod()
     # Please put the sequences (e.g., wild_type.txt, patient_1.txt) in the same directory/folder as this Python script
-    ANALYSIS_REPORT = main('wild_type.txt', 'patient_17.txt') # You may change the file name to see the results of other patients
-    print(ANALYSIS_REPORT)
+    for i in range(17):
+        name = 'patient_'+str(i+1)
+        ANALYSIS_REPORT = main('wild_type.txt', name+'.txt') # You may change the file name to see the results of other patients
+        with open(name+'_report.txt','x',encoding="utf-8") as file:
+            file.write(ANALYSIS_REPORT)

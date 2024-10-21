@@ -1,0 +1,25 @@
+Wild-Type DNA Nucleotide Distribution:
+  Adenine (A): 1759
+  Thymine (T): 2368
+  Cytosine (C): 1585
+  Guanine (G): 1376
+
+-----------------------------------
+
+BRCA1 Gene (Patient Sequence)
+Changed from Wild-Type: No
+Type of DNA Mutation: None
+DNA Sequence Alignment:
+No mutation
+-----------------------------------
+
+BRCA1 Protein (Patient Sequence)
+Change from Wild-Type: No
+Type of Amino Acid Mutation: Silent
+Change in Protein Length: No (0 amino acids)
+Percent Change in Protein Length: 0.00%
+Protein Length Ratio (Patient/WT): 1.00
+Mutation:       No amino acid mutation (sequences are identical).
+Percent Different Amino Acids: 0.00%
+Amino Acid Sequence Alignment:
+No mutation detected

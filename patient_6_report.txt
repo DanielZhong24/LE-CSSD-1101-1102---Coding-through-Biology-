@@ -1,0 +1,30 @@
+Wild-Type DNA Nucleotide Distribution:
+  Adenine (A): 1759
+  Thymine (T): 2368
+  Cytosine (C): 1585
+  Guanine (G): 1376
+
+-----------------------------------
+
+BRCA1 Gene (Patient Sequence)
+Changed from Wild-Type: Yes
+Type of DNA Mutation: Substitution
+DNA Sequence Alignment:
+Wild-type DNA: ...CTTCTCTGATGAGTACAACAA...
+Patient DNA: ...CTTCTCTGATAAGTACAACAA...
+Mutation: Substitution at index 5166: G → A
+-----------------------------------
+
+BRCA1 Protein (Patient Sequence)
+Change from Wild-Type: Yes
+Type of Amino Acid Mutation: Missense
+Change in Protein Length: No (0 amino acids)
+Percent Change in Protein Length: 0.00%
+Protein Length Ratio (Patient/WT): 1.00
+Mutation:       Missense mutation at position 1685.
+Amino acid 'T' changed to 'I'
+Percent Different Amino Acids: 0.05%
+Amino Acid Sequence Alignment:
+Wild-type amino acid sequence: ...TLTNLITEETTHVVMKTDAEF...
+Patient amino acid sequence: ...TLTNLITEETIHVVMKTDAEF...
+Mutation: Missense mutation at index 1684: T → I
