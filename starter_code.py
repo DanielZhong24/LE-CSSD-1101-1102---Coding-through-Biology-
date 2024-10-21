@@ -808,5 +808,5 @@ if __name__ == "__main__":
     for i in range(17):
         name = 'patient_'+str(i+1)
         ANALYSIS_REPORT = main('wild_type.txt', name+'.txt') # You may change the file name to see the results of other patients
-        with open(name+'_report.txt','x',encoding="utf-8") as file:
+        with open(f'report_{i+1}.txt','x',encoding="utf-8") as file:
             file.write(ANALYSIS_REPORT)
